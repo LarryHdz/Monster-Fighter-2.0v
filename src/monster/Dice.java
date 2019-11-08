@@ -1,7 +1,7 @@
 package monster;
 
 public class Dice {
-	//Dice
+	//Dice working on by Larry
 	Dice() {
 	}
 	
