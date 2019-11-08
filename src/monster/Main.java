@@ -4,7 +4,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.print("Monster FIGHTER v2.0!!!!!!!");
+		System.out.println("Monster FIGHTER v2.0!!!!!!!");
+		Dice x = new Dice();
+		System.out.println(x.roll());
+		
 	}
 
 }
