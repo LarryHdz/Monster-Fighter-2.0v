@@ -1,6 +1,6 @@
 package monster;
 
-public class Stats {
+public class PlayerMonster {
 int max=4, min=1;
 
 Dice x = new Dice();
