@@ -6,20 +6,18 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException 
 	{
-		// TODO Auto-generated method stub
 
-		//System.out.println("Monster FIGHTER v2.0!!!!!!!");
+		/*System.out.println("Monster FIGHTER v2.0!!!!!!!");
 		
-		//testing the Dice class;
-		//Dice x = new Dice();
-		//System.out.println(x.roll());
+		testing the Dice class;
+		Dice x = new Dice();
+		System.out.println(x.roll());
 
-//
-//			String s = "Hello";
-//			
-//			s = Hashing.encryptThisString(s);
-//		
-//			System.out.println(s);
+		String s = "Hello";
+			
+			s = Hashing.encryptThisString(s);
+	
+		System.out.println(s);*/
 		
 		Database db = new Database();
 		PlayerMonster p1 = new PlayerMonster();
@@ -33,9 +31,6 @@ public class Main {
 		PlayerMonster p2 = new PlayerMonster();
 		db.callAdversaryMonster(p1, p2);
 		p2.displayAll();
-		
-		
-
 		
 	}
 

@@ -5,8 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Hashing 
 {
-	public static String encryptThisString(String input) 
-    { 
+	public static String encryptThisString(String input) { 
         try { 
             // getInstance() method is called with algorithm SHA-512 
             MessageDigest md = MessageDigest.getInstance("SHA-512"); 
@@ -23,8 +22,7 @@ public class Hashing
             String hashtext = no.toString(16); 
   
             // Add preceding 0s to make it 32 bit 
-            while (hashtext.length() < 32) 
-            { 
+            while (hashtext.length() < 32) { 
                 hashtext = "0" + hashtext; 
             } 
   
@@ -33,8 +31,7 @@ public class Hashing
         } 
   
         // For specifying wrong message digest algorithms 
-        catch (NoSuchAlgorithmException e) 
-        { 
+        catch (NoSuchAlgorithmException e){ 
             throw new RuntimeException(e); 
         } 
     } 

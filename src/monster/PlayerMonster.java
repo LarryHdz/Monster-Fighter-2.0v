@@ -22,8 +22,7 @@ PlayerMonster()
 
 }
 
-public void make(String n)
-{
+public void make(String n){
 	uname = n;
 	
 	this.attack();
@@ -36,8 +35,7 @@ public void make(String n)
 	newMon = true;
 }
 
-public void dbm(String name, String at,String de, String ag, String r, String x, String w, String l)
-{
+public void dbm(String name, String at,String de, String ag, String r, String x, String w, String l){
 	uname = name;
 	
 	attack = Integer.parseInt(at);
@@ -50,8 +48,7 @@ public void dbm(String name, String at,String de, String ag, String r, String x,
 	newMon =false;
 }
 
-public void displayAll()
-{
+public void displayAll(){
 	System.out.println("Name: " + uname);
 	System.out.println("Attack: " + attack);
 	System.out.println("Defense: " + defense);
@@ -62,64 +59,52 @@ public void displayAll()
 	System.out.println("Lose: " + lose);
 }
 
-
-public void name(String n)
-{
+public void name(String n){
 	uname = n;
 }
-public void attack()
-{
+public void attack(){
 	attack= x.roll();
 }
-public void defense()
-{
+public void defense(){
 	defense = x.roll();
 }
-public void agility()
-{
+public void agility(){
 	agility = x.roll();
 }
 
 //need to store into the data base
 
-public int getAttack()
-{
+public int getAttack(){
 	return attack;
 }
 
-public int getDefense()
-{
+public int getDefense(){
 	return defense;
 }
 
-public int getAgility()
-{
+public int getAgility(){
 	return agility;
 }
 
 
-public int getRank()
-{
+public int getRank(){
 	return rank;
 }
 
-public int getXp()
-{
+public int getXp(){
 	return xp;
 }
 
-public int getWin()
-{
+public int getWin(){
 	return win;
 }
 
-public int getLose()
-{
+public int getLose(){
 	return lose;
 }
 
-public String getName()
-{
+public String getName(){
 	return uname;
 }
+
 }

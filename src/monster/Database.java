@@ -11,18 +11,14 @@ public class Database
 {
 	Connection con;
 	
-	
-	
-	Database()throws SQLException
-	{
+	Database()throws SQLException{
 		
 		String url = "jdbc:mysql://35.232.190.192:3306/db4?useSSL=false";
 		
 		 con = DriverManager.getConnection(url, "user4", "4782");
 	}
 
-	public boolean callPlayerMonster(PlayerMonster m) throws SQLException
-	{
+	public boolean callPlayerMonster(PlayerMonster m) throws SQLException{
 		Scanner s = new Scanner(System.in);
 		System.out.println("Please input monster name: ");
 		String name = s.next();
@@ -32,21 +28,13 @@ public class Database
 		String sqlStatement;
 		ResultSet result;
 		
-		
-		
-		
-		
-		
-		
-		if(exists(name) == false)
-		{
+		if(exists(name) == false){
 			System.out.println("No monster found");
 			
 			s.close();
 			return false;
 		}
-		else
-		{
+		else{
 			sqlStatement = "select * from Monsters where uname = " + "\"" + name + "\"";
 			result = stmt.executeQuery(sqlStatement);
 			
@@ -64,8 +52,7 @@ public class Database
 			//System.out.println(dhash);
 			
 			//has match?
-			if(phash.equals(dhash))
-			{
+			if(phash.equals(dhash)){
 				
 				
 m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getString(4),result.getString(5),result.getString(6),result.getString(7),result.getString(8));
@@ -75,30 +62,17 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 				return true;
 				
 			}
-			else
-			{
+			else{
 				System.out.println("Password Incorrect");
 				return false;
 				
 				
 			}
-			
-			
-			
-			
 		}
-		
-	
-		
-		
-			
 	}
 
-	public boolean callAdversaryMonster(PlayerMonster player, PlayerMonster adversary) throws SQLException
-	{
+	public boolean callAdversaryMonster(PlayerMonster player, PlayerMonster adversary) throws SQLException{
 		int holder = player.getRank()+5;
-		
-		
 		
 		java.sql.Statement stmt = con.createStatement();
 		String sqlStatement ;
@@ -112,12 +86,10 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 		
 		int counts = Integer.parseInt(r);
 		
-		if(counts == 0)
-		{
+		if(counts == 0){
 			return false;
 		}
-		else
-		{
+		else{
 			sqlStatement = "select * from Monsters where rank between " + player.getRank() + " and " + holder ;
 			result = stmt.executeQuery(sqlStatement);
 			result.next();
@@ -133,22 +105,17 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 			
 			
 			return true;
-		}
-		
-		
-		
+		}	
 	}
 	
-	public boolean makeMonster(PlayerMonster m) throws SQLException
-	{
+	public boolean makeMonster(PlayerMonster m) throws SQLException{
 		java.sql.Statement stmt = con.createStatement();
 		String sqlStatement ;
 		Scanner s = new Scanner(System.in);
 		System.out.println("Please input a new monster name: ");
 		String name = s.next();
 		
-		if(exists(name) == false)
-		{
+		if(exists(name) == false){
 		
 		
 		m.make(name);
@@ -166,18 +133,14 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 		s.close();
 		return true;
 		}
-		else
-		{
+		else{
 			System.out.println("Monster name is taken");
 			s.close();
 			return false;
 		}
 	}
 	
-	public boolean exists(String name) throws SQLException 
-	{
-		
-		
+	public boolean exists(String name) throws SQLException {
 		
 		java.sql.Statement stmt = con.createStatement();
 		String sqlStatement = "select Count(*) from Monsters where uname = " + "\"" + name + "\"";
@@ -189,43 +152,27 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 		
 		int exists = Integer.parseInt(r);
 		
-		if(exists == 0)
-		{
+		if(exists == 0){
 			return false;
 		}
-		else
-		{
+		else{
 			return true;
 		}
 	}
 	
-	
-	
-	
-	public void closedb() throws SQLException
-	{
+	public void closedb() throws SQLException{
 		con.close();
 	}
 	
-	public void updateDB(PlayerMonster m) throws SQLException
-	{
+	public void updateDB(PlayerMonster m) throws SQLException{
 		java.sql.Statement stmt = con.createStatement();
 		String sqlStatement ;
-		
-		
-		
 		
 			sqlStatement = "UPDATE Monsters SET attack = " + m.getAttack() + ", defense = " + m.getDefense() + ", agility = " + m.getAgility() + ", rank = " + m.getRank() + ", xp = " + m.getXp() + ", win = " + m.getWin() + ", lose = " + m.getLose() + "WHERE uname =" + "\"" + m.getName() + "\"";
 			
 			stmt.executeUpdate(sqlStatement); 
 		
-		
-		
-		
-		
-		
 	}
-	
 	
 	
 }
