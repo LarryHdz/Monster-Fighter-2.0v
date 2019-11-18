@@ -296,8 +296,7 @@ public class GUI
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			//createGameScreen();
+
 		}
 	}
 	
