@@ -1,17 +1,17 @@
 package monster;
-
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
 
 
 public class Database 
 {
 	Connection con;
 	
-	Database()throws SQLException{
+	Database()throws SQLException
+	{
 		
 		String url = "jdbc:mysql://35.232.190.192:3306/db4?useSSL=false";
 		
@@ -19,9 +19,11 @@ public class Database
 	}
 
 	public boolean callPlayerMonster(PlayerMonster m) throws SQLException{
-		Scanner s = new Scanner(System.in);
-		System.out.println("Please input monster name: ");
-		String name = s.next();
+		//Scanner s = new Scanner(System.in);
+		//System.out.println("Please input monster name: ");
+		String name = JOptionPane.showInputDialog("Please input monster name:");
+		//= s.next();
+		
 		
 		
 		java.sql.Statement stmt = con.createStatement();
@@ -31,18 +33,20 @@ public class Database
 		if(exists(name) == false){
 			System.out.println("No monster found");
 			
-			s.close();
+			//s.close();
 			return false;
 		}
 		else{
 			sqlStatement = "select * from Monsters where uname = " + "\"" + name + "\"";
 			result = stmt.executeQuery(sqlStatement);
 			
-			System.out.println("Monster found. Please input password: ");
+			//System.out.println("Monster found. Please input password: ");
 			
 			//player password
-			String pword = s.next();
-			s.close();
+			String pword = JOptionPane.showInputDialog("Monster found. Please input password: ");
+			
+			//= s.next();
+			//s.close();
 			result.next();
 			//password hash from database
 			String dhash = result.getString(9);
@@ -57,13 +61,15 @@ public class Database
 				
 m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getString(4),result.getString(5),result.getString(6),result.getString(7),result.getString(8));
 				
-				System.out.println("Password Correct. Monster ready for battle!");
+				//System.out.println("Password Correct. Monster ready for battle!");
+					JOptionPane.showMessageDialog(null,"Password Correct. Monster ready for battle!");
                 m.displayAll();
 				return true;
 				
 			}
 			else{
-				System.out.println("Password Incorrect");
+				//System.out.println("Password Incorrect");
+				JOptionPane.showMessageDialog(null,"Password Incorrect");
 				return false;
 				
 				
@@ -74,6 +80,7 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 	public boolean callAdversaryMonster(PlayerMonster player, PlayerMonster adversary) throws SQLException{
 		int holder = player.getRank()+5;
 		
+		System.out.println(player.getRank());
 		java.sql.Statement stmt = con.createStatement();
 		String sqlStatement ;
 		ResultSet result;
@@ -95,7 +102,7 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 			result.next();
 		
 			int stop = (int) ((Math.random() * ((counts - 0) + 1)) + 0);
-			for(int i = 0; i <= stop; ++i)
+			for(int i = 0; i < stop; ++i)
 			{
 				result.next();
 			}
@@ -111,31 +118,38 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 	public boolean makeMonster(PlayerMonster m) throws SQLException{
 		java.sql.Statement stmt = con.createStatement();
 		String sqlStatement ;
-		Scanner s = new Scanner(System.in);
-		System.out.println("Please input a new monster name: ");
-		String name = s.next();
+		//Scanner s = new Scanner(System.in);
+		//System.out.println("Please input a new monster name: ");
 		
-		if(exists(name) == false){
+		String name =JOptionPane.showInputDialog("Please input a new monster name: ");
+		//= s.next();
+		
+		if(exists(name) == false)
+		{
 		
 		
 		m.make(name);
 		
-		System.out.println("New monster is ready for battle!");
+		//System.out.println("New monster is ready for battle!");
+		JOptionPane.showMessageDialog(null, "New monster is ready for battle!");
 		m.displayAll();
-		System.out.println("Please input a password for your monster");
-		String pword = s.next();
+		
+		//System.out.println("Please input a password for your monster");
+		String pword = JOptionPane.showInputDialog("Please input a password for your monster");
+		//= s.next();
 		String phash = Hashing.encryptThisString(pword);
 		
 		
 		
 		sqlStatement = "insert into Monsters Values ("+ "\"" + m.getName() + "\"" +"," + m.getAttack() + ", " + m.getDefense() + ", " + m.getAgility() + ", " + m.getRank() + ", " + m.getXp() + ", " + m.getWin() + ", " + m.getLose() + ", "  + "\"" + phash + "\"" + ")";
 		stmt.executeUpdate(sqlStatement); 
-		s.close();
+		//s.close();
 		return true;
 		}
 		else{
-			System.out.println("Monster name is taken");
-			s.close();
+			//System.out.println("Monster name is taken");
+			JOptionPane.showMessageDialog(null, "Monster name is taken");
+			//s.close();
 			return false;
 		}
 	}

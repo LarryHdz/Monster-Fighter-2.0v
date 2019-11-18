@@ -24,13 +24,13 @@ public class Main {
 		
 		
 		
-		//db.callPlayerMonster(p1);
-		db.makeMonster(p1);
+		db.callPlayerMonster(p1);
+		//db.makeMonster(p1);
 		//p1.displayAll();
 		
 		PlayerMonster p2 = new PlayerMonster();
 		db.callAdversaryMonster(p1, p2);
-		p2.displayAll();
+		//p2.displayAll();
 		
 	}
 

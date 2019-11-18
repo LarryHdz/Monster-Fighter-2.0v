@@ -1,5 +1,5 @@
 package monster;
-
+import javax.swing.*;
 public class PlayerMonster 
 {
 int max=4, min=1;
@@ -49,14 +49,9 @@ public void dbm(String name, String at,String de, String ag, String r, String x,
 }
 
 public void displayAll(){
-	System.out.println("Name: " + uname);
-	System.out.println("Attack: " + attack);
-	System.out.println("Defense: " + defense);
-	System.out.println("Agility: " + agility);
-	System.out.println("Rank: "+ rank);
-	System.out.println("Xp: " + xp);
-	System.out.println("Win: " + win);
-	System.out.println("Lose: " + lose);
+	String stats ="Name: " + uname + "\n"+ "Attack: " + attack+ "\n" + "Defense: " + defense+ "\n"+"Agility: " + agility+ "\n"+ "Rank: "+ rank+ "\n" + "Xp: " + xp+ "\n" +"Win: " + win+ "\n" +"Lose: " + lose+ "\n";
+	
+	JOptionPane.showMessageDialog(null,stats);
 }
 
 public void name(String n){

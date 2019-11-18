@@ -1,10 +1,15 @@
 package monster;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.*;
 import javax.swing.*;
 
-public class GUI {
+
+public class GUI 
+{
+	
+	
 	
 	JFrame window;
 	Container con;
@@ -28,6 +33,14 @@ public class GUI {
 	int smpx, smpy, smpw, smph;
 	int currentScreenWidth, currentScreenHight;
 	String weapon, position;
+	
+	
+	Database db;
+	
+
+		
+	
+	
 	
 	public GUI(){
 		currentScreenWidth = 800;
@@ -82,6 +95,11 @@ public class GUI {
 		
 		con.add(TnameP);
 		con.add(SbuttonP);
+	}
+	
+	public void setDB(Database d)
+	{
+		db = d;
 	}
 	
 	public void createGameScreen() {
