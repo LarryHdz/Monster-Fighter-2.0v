@@ -9,10 +9,9 @@ import javax.swing.*;
 public class GUI 
 {
 	
-	
-	
 	JFrame window;
 	Container con;
+	Database db = New Database();
 	
 	JPanel TnameP, SbuttonP, MgameP, CbuttonP, playerPanel;
 	JLabel TnameL, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
@@ -33,14 +32,6 @@ public class GUI
 	int smpx, smpy, smpw, smph;
 	int currentScreenWidth, currentScreenHight;
 	String weapon, position;
-	
-	
-	Database db;
-	
-
-		
-	
-	
 	
 	public GUI(){
 		currentScreenWidth = 800;

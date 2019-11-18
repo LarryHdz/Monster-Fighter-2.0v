@@ -10,12 +10,16 @@ public class Database
 {
 	Connection con;
 	
-	Database()throws SQLException
+	Database()
 	{
-		
 		String url = "jdbc:mysql://35.232.190.192:3306/db4?useSSL=false";
 		
-		 con = DriverManager.getConnection(url, "user4", "4782");
+		 try {
+			con = DriverManager.getConnection(url, "user4", "4782");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public boolean callPlayerMonster(PlayerMonster m) throws SQLException{
