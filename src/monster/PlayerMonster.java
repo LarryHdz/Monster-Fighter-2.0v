@@ -6,6 +6,7 @@ int max=4, min=1;
 
 Dice x = new Dice();
 
+private int hp = 20;
 private String uname;
 private int attack;
 private int defense;
@@ -101,5 +102,27 @@ public int getLose(){
 public String getName(){
 	return uname;
 }
+
+
+public int getHp()
+{
+	return hp;
+}
+public boolean setHp(int h) 
+{
+	hp =hp -h;
+	
+	if(this.getHp() <1)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+	
+}
+
+
 
 }
