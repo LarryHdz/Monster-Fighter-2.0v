@@ -1,5 +1,5 @@
 package monster;
-
+import javax.swing.*;
 public class Battle 
 {
 	PlayerMonster p1;
@@ -30,33 +30,29 @@ public class Battle
 	
 	
 	
-	
+	//false =  player win
 	public boolean playerAttack()
 	{
 		int dmg = p1.getAttack()/2 -p2.getDefense();
 		return p2.setHp(dmg);
 			
 	}
-	
+	//false = player lose
 	public boolean monsterAttack()
 	{
 		int dmg = p2.getAttack()/2 -p1.getDefense();
 		return p1.setHp(dmg);
 	}
+
 	
-	public boolean defend()
+	
+	public void defend()
 	{
 		int chance = (int) ((Math.random() * ((1 - 0) + 1)) + 0);
 		
-		if( chance > 0)
-		{
 			int dmg = p2.getAttack()/2 - p1.getDefense();
-			return p1.setHp(dmg);
-		}
-		else
-		{
-			return true;
-		}
+			 p1.setHp(dmg);
+		
 		
 		
 	}
@@ -88,6 +84,41 @@ public class Battle
 			 p1.setHp(-5);
 			 
 			 item =false;
+	}
+	
+	
+	public void rank()
+	{
+		int r = p1.getRank();
+		p1.setRank();
+		if(p1.getRank() > r)
+		{
+			p1.displayAll();
+			String option = JOptionPane.showInputDialog("You leveled up!\n Add +1 to any stat\n 1.Attack " + p1.getAttack() + "\n 2.Defense " + p1.getDefense()+ "\n 3.Agility " + p1.getDefense() + "\n");
+			
+			if(option == "1")
+			{
+				p1.setAttack(p1.getAttack()+1);
+			}
+			else if(option == "2")
+			{
+				p1.setDefense(p1.getDefense()+1);
+			}
+			else
+			{
+				p1.setAgility(p1.getAgility()+1);
+				
+			}
+			
+		}
+		
+		
+	}
+	
+	public void xp()
+	{
+		
+		p1.setXp(p1.getXp()+ p1.getHp());
 	}
 	
 	

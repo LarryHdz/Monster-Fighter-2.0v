@@ -123,6 +123,52 @@ public boolean setHp(int h)
 	
 }
 
+public void setWin(int w)
+{
+	win =w;
+	}
+
+public void setLose(int l)
+{
+	lose = l;
+}
+
+public void setRank()
+{
+	rank = xp/20;
+
+}
+
+
+public void setAttack(int a)
+{
+	attack =a;
+}
+
+public void setDefense(int a)
+{
+	defense =a;
+}
+
+public void setAgility(int a)
+{
+	agility =a;
+
+}
+
+
+public void setXp(int x)
+{
+	xp =x;
+
+}
+
+
+
+
+
+
 
 
 }
+
