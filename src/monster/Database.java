@@ -35,8 +35,8 @@ public class Database
 		ResultSet result;
 		
 		if(exists(name) == false){
-			System.out.println("No monster found");
-			
+			//System.out.println("No monster found");
+			JOptionPane.showMessageDialog(null,"No monster found");
 			//s.close();
 			return false;
 		}
