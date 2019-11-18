@@ -11,18 +11,20 @@ public class GUI
 	
 	JFrame window;
 	Container con;
-	Database db = New Database();
+	Database db = new Database();
+	PlayerMonster x = new PlayerMonster();
 	
 	JPanel TnameP, SbuttonP, MgameP, CbuttonP, playerPanel;
 	JLabel TnameL, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
-	JButton Sbutton, choice1, choice2, choice3, choice4;
+	JButton newMonster, loginMonster, choice1, choice2, choice3, choice4;
 	
 	Font titleFont = new Font("Cooper", Font.PLAIN, 40);
 	Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
 	
 	JTextArea MtextA; //allows for text
 	
-	TitleScreenHandler tsHandler = new TitleScreenHandler();
+	nMonster making = new nMonster();
+	lMonster login = new lMonster();
 	ChoiceHandler choicehandler = new ChoiceHandler();
 	
 	Dice use = new Dice();
@@ -72,25 +74,29 @@ public class GUI
 		SbuttonP = new JPanel();
 		SbuttonP.setBounds(smpx, smpy, smpw, smph); // starts on(x,y), then given a (width, height)
 		SbuttonP.setBackground(Color.black);
+		SbuttonP.setLayout(new GridLayout(2,1));
 		
-		Sbutton = new JButton("Start!");
-		Sbutton.setBackground(Color.white);
-		Sbutton.setForeground(Color.black);
-		Sbutton.setFont(normalFont);
+		newMonster = new JButton("New Monster!");
+		newMonster.setBackground(Color.white);
+		newMonster.setForeground(Color.black);
+		newMonster.setFont(normalFont);
+		newMonster.addActionListener(making); //gives the button an action when clicked
+		newMonster.setFocusPainted(false);
 		
-		Sbutton.addActionListener(tsHandler); //gives the button an action when clicked
-		Sbutton.setFocusPainted(false);
+		loginMonster = new JButton("Login!");
+		loginMonster.setBackground(Color.white);
+		loginMonster.setForeground(Color.black);
+		loginMonster.setFont(normalFont);
+		
+		loginMonster.addActionListener(login); //gives the button an action when clicked
+		loginMonster.setFocusPainted(false);
 		
 		TnameP.add(TnameL);
-		SbuttonP.add(Sbutton);
+		SbuttonP.add(newMonster);
+		SbuttonP.add(loginMonster);
 		
 		con.add(TnameP);
 		con.add(SbuttonP);
-	}
-	
-	public void setDB(Database d)
-	{
-		db = d;
 	}
 	
 	public void createGameScreen() {
@@ -258,11 +264,43 @@ public class GUI
 		MtextA.setText("You Encountered a Level 20 MONSTER!!!!!");
 	}
 	
-	public class TitleScreenHandler implements ActionListener{
+	public class nMonster implements ActionListener{
 		public void actionPerformed(ActionEvent event) {
-			createGameScreen();
+			try {
+				if(db.makeMonster(x)) {
+					createGameScreen();
+				}
+				else {
+					new GUI();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//createGameScreen();
 		}
 	}
+	
+	public class lMonster implements ActionListener{
+		public void actionPerformed(ActionEvent event) {
+			try {
+				if(db.callPlayerMonster(x)) {
+					createGameScreen();
+				}
+				else {
+					//GUI();
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//createGameScreen();
+		}
+	}
+	
 	
 	
 public static void main(String[] args) {
