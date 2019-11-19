@@ -36,7 +36,7 @@ public class Battle
 	//false = player lose
 	public boolean monsterAttack()
 	{
-		int dmg = p2.getAttack()/2 -p1.getDefense();
+		int dmg = p2.getAttack() -p1.getDefense();
 		return p1.setHp(dmg);
 	}
 
@@ -44,8 +44,16 @@ public class Battle
 	{
 		int chance = (int) ((Math.random() * ((1 - 0) + 1)) + 0);
 		
-			int dmg = p2.getAttack()/2 - p1.getDefense();
+		if(chance > 0)
+		{
+			int dmg = p2.getAttack() - p1.getDefense();
 			 p1.setHp(dmg);
+		}
+		else
+		{
+			//no attack
+		}
+			
 		
 		
 		
@@ -109,6 +117,8 @@ public class Battle
 	
 	public void xp()
 	{
+		String message =  "Won " + p1.getHp() + " xp";
+		JOptionPane.showMessageDialog(null, message);
 		
 		p1.setXp(p1.getXp()+ p1.getHp());
 	}
