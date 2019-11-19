@@ -13,6 +13,9 @@ public class GUI
 	Container con;
 	Database db = new Database();
 	PlayerMonster x = new PlayerMonster();
+	PlayerMonster y = new PlayerMonster();
+	Battle fight = new Battle(x,y);
+	
 	
 	JPanel TnameP, SbuttonP, MgameP, CbuttonP, playerPanel;
 	JLabel TnameL, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
@@ -120,7 +123,7 @@ public class GUI
 		
 		MgameP.add(MtextA);
 		
-		//BUTTONS
+		/*BUTTONS
 		CbuttonP = new JPanel();
 		CbuttonP.setBounds(100, 350, 600, 100);
 		CbuttonP.setBackground(Color.darkGray);
@@ -161,7 +164,7 @@ public class GUI
 		choice4.setFocusPainted(false);
 		choice4.addActionListener(choicehandler);
 		choice4.setActionCommand("4");
-		CbuttonP.add(choice4);
+		CbuttonP.add(choice4);*/
 		
 		playerPanel = new JPanel();
 		playerPanel.setBounds(100, 15, 600, 50);
@@ -193,76 +196,227 @@ public class GUI
 		playerSetup();
 		
 	}
+
+	public void Playerturn() {
+		//BUTTONS
+				CbuttonP = new JPanel();
+				CbuttonP.setBounds(100, 350, 600, 100);
+				CbuttonP.setBackground(Color.darkGray);
+				CbuttonP.setLayout(new GridLayout(1,4)); //gives the layout to x rows and y columns etc;
+				con.add(CbuttonP);
+				
+				choice1 = new JButton("Attack!");
+				choice1.setBackground(Color.darkGray);
+				choice1.setForeground(Color.black);
+				choice1.setFont(normalFont);
+				choice1.setFocusPainted(false);
+				choice1.addActionListener(choicehandler); //directs the click
+				choice1.setActionCommand("1");
+				CbuttonP.add(choice1);
+				
+				choice2 = new JButton("Defend");
+				choice2.setBackground(Color.darkGray);
+				choice2.setForeground(Color.black);
+				choice2.setFont(normalFont);
+				choice2.setFocusPainted(false);
+				choice2.addActionListener(choicehandler);
+				choice2.setActionCommand("2");
+				CbuttonP.add(choice2);
+				
+				choice3 = new JButton("Item");
+				choice3.setBackground(Color.darkGray);
+				choice3.setForeground(Color.black);
+				choice3.setFont(normalFont);
+				choice3.setFocusPainted(false);
+				choice3.addActionListener(choicehandler);
+				choice3.setActionCommand("3");
+				CbuttonP.add(choice3);
+				
+				choice4 = new JButton("Run!");
+				choice4.setBackground(Color.darkGray);
+				choice4.setForeground(Color.black);
+				choice4.setFont(normalFont);
+				choice4.setFocusPainted(false);
+				choice4.addActionListener(choicehandler);
+				choice4.setActionCommand("4");
+				CbuttonP.add(choice4);
+				
+				CbuttonP.setVisible(true);
+				
+				/*playerPanel = new JPanel();
+				playerPanel.setBounds(100, 15, 600, 50);
+				playerPanel.setBackground(Color.black);
+				playerPanel.setLayout(new GridLayout(1,4));
+				con.add(playerPanel);
+				
+				hpLabel = new JLabel("HP:");
+				hpLabel.setFont(normalFont);
+				hpLabel.setForeground(Color.white);
+				playerPanel.add(hpLabel);
+				
+				hpLabelNumber = new JLabel();
+				hpLabelNumber.setFont(normalFont);
+				hpLabelNumber.setForeground(Color.white);
+				playerPanel.add(hpLabelNumber);
+				
+				//can change for something else? Item?
+				weaponLabel = new JLabel("Item:");
+				weaponLabel.setFont(normalFont);
+				weaponLabel.setForeground(Color.white);
+				playerPanel.add(weaponLabel);
+				
+				weaponLabelName = new JLabel();
+				weaponLabelName.setFont(normalFont);
+				weaponLabelName.setForeground(Color.white);
+				playerPanel.add(weaponLabelName);*/
+				
+	}
+	
+	public void hp_itemGUI() {
+		
+		playerPanel = new JPanel();
+		playerPanel.setBounds(100, 15, 600, 50);
+		playerPanel.setBackground(Color.black);
+		playerPanel.setLayout(new GridLayout(1,4));
+		con.add(playerPanel);
+		
+		hpLabel = new JLabel("HP:");
+		hpLabel.setFont(normalFont);
+		hpLabel.setForeground(Color.white);
+		playerPanel.add(hpLabel);
+		
+		hpLabelNumber = new JLabel();
+		hpLabelNumber.setFont(normalFont);
+		hpLabelNumber.setForeground(Color.white);
+		playerPanel.add(hpLabelNumber);
+		
+		//can change for something else? Item?
+		weaponLabel = new JLabel("Item:");
+		weaponLabel.setFont(normalFont);
+		weaponLabel.setForeground(Color.white);
+		playerPanel.add(weaponLabel);
+		
+		weaponLabelName = new JLabel();
+		weaponLabelName.setFont(normalFont);
+		weaponLabelName.setForeground(Color.white);
+		playerPanel.add(weaponLabelName);
+	}
 	
 	public class ChoiceHandler implements ActionListener{
-		//1, attack hit; 2, blocked!; 3, Item; 4, Ran Away!;
+		//1, attack hit; 2, blocked!; 3, Item; 4, Run Away!;
 		
 		public void actionPerformed(ActionEvent event) {
 			
 			String yourChoice = event.getActionCommand();
+			
 			if(yourChoice.equals("1")) {
-				//roll number for attacking so "You hit for _ points!"
-				useack();
+				//roll number for attacking so "You hit for _ points!" useack();
+				if(fight.playerAttack()) {
+					
+				}
+				else {
+					MtextA.setText("You Won!");
+				}
+				
 			}
 			else if(yourChoice.equals("2")) {
-				//roll dice 1 out 2 to defend "You blocked!"
-				usedef();
+				//roll dice 1 out 2 to defend "You blocked!" usedef();
+				fight.defend();
 			}
 			else if(yourChoice.equals("3")) {
-				//roll dice out of 5 when you can use an item "You healed _ points!"
-				useitem();
+				//roll dice out of 5 when you can use an item "You healed _ points!" useitem();
+				
+				if(fight.getItem()) {
+					int t = use.roll(); 
+					MtextA.setText("You healed for " + t + " points!");
+					//update players health
+					x.heal(t);
+					//update gui
+					playerSetup();
+				}
+				else {
+					MtextA.setText("You dont have an item!");
+				}
 			}
 			else if(yourChoice.equals("4")) {
-				//roll dice 1 out 2 to run "You ran away!"
-				userun();
+				//roll dice 1 out 2 to run "You ran away!"userun();
+					int t = use.roll();
+					if(t-1 < 2) {
+						MtextA.setText("You ran!");
+						//end game?
+					}
+					else {
+						MtextA.setText("You triped!");
+						//continue
+					}
 			}
+			
+			fight.pfirst = false;
+			
+			encounters();
 			
 		}
 	}
 	
-	public void useack(){
-		int t = use.roll();
-		MtextA.setText("You hit for " + t + " points!"); 
-	}
-	
-	public void usedef(){
-		int t = use.roll();
-		if(t-1 < 2) {
-			MtextA.setText("You Blocked!");
-		}
-		else {
-			MtextA.setText("You got hit!");
-		}
-	}
-	
-	public void useitem(){
-		int t = use.roll();
-		MtextA.setText("You healed for " + t + " points!");
-	}
-	
-	public void userun(){
-		int t = use.roll();
-		if(t-1 < 2) {
-			MtextA.setText("You ran!");
-		}
-		else {
-			MtextA.setText("You triped!");
-		}
-	}
-	
 	public void playerSetup() {
-		playerHP = 20;
+		//SbuttonP.setVisible(false); might have to clear the screen
+		playerHP = x.getHp();
 		hpLabelNumber.setText(""+ playerHP);
+		
+		if(fight.getItem()) {
 		weapon = "Health Pack";
+		}
+		else {
+			weapon = "";
+		}
 		weaponLabelName.setText(weapon);
+		hp_itemGUI();
+		
+		try {
+			db.callPlayerMonster(x);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
 		
 		encounters();
 	}
 	 
-	//where the games starts!=
-	public void encounters() {
-		MtextA.setText("You Encountered a Level 20 MONSTER!!!!!");
+	public void battlefield() {
+		try {
+			db.callAdversaryMonster(x,y);
+			y.displayAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	//where the games starts!=
+	
+	public void encounters() {
+
+			if(fight.pfirst) {
+				MtextA.setText("You go first!");
+				Playerturn();
+				//fight.playerAttack();
+			}
+			else {
+				MtextA.setText("Monster goes first!");
+				if(fight.monsterAttack()) {
+					playerSetup();
+					//attack player
+					CbuttonP.setVisible(false);
+					fight.pfirst = true;
+					encounters();
+				}
+				else {
+					MtextA.setText("You Lost!");
+					//update;
+				}
+			}
+	}
+	
 	
 	public class nMonster implements ActionListener{
 		public void actionPerformed(ActionEvent event) {
@@ -277,10 +431,9 @@ public class GUI
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			//createGameScreen();
 		}
 	}
+	
 	
 	public class lMonster implements ActionListener{
 		public void actionPerformed(ActionEvent event) {
@@ -296,15 +449,12 @@ public class GUI
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			//createGameScreen();
 		}
 	}
 	
 	
-	
-public static void main(String[] args) {
-	new GUI();
+	public static void main(String[] args) {
+		new GUI();
 	}
 
 

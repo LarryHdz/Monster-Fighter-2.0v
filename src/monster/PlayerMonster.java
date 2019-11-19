@@ -123,6 +123,10 @@ public boolean setHp(int h)
 	
 }
 
+public void heal(int i) {
+	hp = hp+i;
+}
+
 public void setWin(int w)
 {
 	win =w;
