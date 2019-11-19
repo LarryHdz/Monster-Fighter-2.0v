@@ -28,6 +28,10 @@ public class Database
 		String name = JOptionPane.showInputDialog("Please input monster name:");
 		//= s.next();
 		
+		if( name  ==  null)
+		{
+			return false;
+		}
 		
 		
 		java.sql.Statement stmt = con.createStatement();
@@ -48,7 +52,10 @@ public class Database
 			
 			//player password
 			String pword = JOptionPane.showInputDialog("Monster found. Please input password: ");
-			
+			if( pword  ==  null)
+			{
+				return false;
+			}
 			//= s.next();
 			//s.close();
 			result.next();
@@ -126,6 +133,10 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 		//System.out.println("Please input a new monster name: ");
 		
 		String name =JOptionPane.showInputDialog("Please input a new monster name: ");
+		if( name  ==  null)
+		{
+			return false;
+		}
 		//= s.next();
 		
 		if(exists(name) == false)
@@ -140,6 +151,10 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 		
 		//System.out.println("Please input a password for your monster");
 		String pword = JOptionPane.showInputDialog("Please input a password for your monster");
+		if( pword  ==  null)
+		{
+			return false;
+		}
 		//= s.next();
 		String phash = Hashing.encryptThisString(pword);
 		
