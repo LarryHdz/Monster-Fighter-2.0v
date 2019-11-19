@@ -30,7 +30,7 @@ public class Main {
 		
 		PlayerMonster p2 = new PlayerMonster();
 		db.callAdversaryMonster(p1, p2);
-		//p2.displayAll();
+		p2.displayAll();
 		
 	}
 

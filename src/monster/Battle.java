@@ -25,11 +25,6 @@ public class Battle
 		
 	}
 	
-	
-	
-	
-	
-	
 	//false =  player win
 	public boolean playerAttack()
 	{
@@ -37,6 +32,7 @@ public class Battle
 		return p2.setHp(dmg);
 			
 	}
+	
 	//false = player lose
 	public boolean monsterAttack()
 	{
@@ -44,8 +40,6 @@ public class Battle
 		return p1.setHp(dmg);
 	}
 
-	
-	
 	public void defend()
 	{
 		int chance = (int) ((Math.random() * ((1 - 0) + 1)) + 0);
@@ -78,14 +72,12 @@ public class Battle
 		return item;
 	}
 	
-	
 	public void useItem()
 	{
 			 p1.setHp(-5);
 			 
 			 item =false;
 	}
-	
 	
 	public void rank()
 	{
