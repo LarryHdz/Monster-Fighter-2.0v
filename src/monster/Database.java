@@ -191,6 +191,5 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 			stmt.executeUpdate(sqlStatement); 
 		
 	}
-	
-	
+
 }

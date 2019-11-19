@@ -13,6 +13,7 @@ public class GUI
 	Container con;
 	Database db = new Database();
 	PlayerMonster x = new PlayerMonster();
+	PlayerMonster fighter = new PlayerMonster();
 	
 	JPanel TnameP, SbuttonP, MgameP, CbuttonP, playerPanel;
 	JLabel TnameL, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
@@ -25,6 +26,7 @@ public class GUI
 	
 	nMonster making = new nMonster();
 	lMonster login = new lMonster();
+	
 	ChoiceHandler choicehandler = new ChoiceHandler();
 	
 	Dice use = new Dice();
@@ -261,6 +263,12 @@ public class GUI
 	 
 	//where the games starts!=
 	public void encounters() {
+		try {
+			db.callAdversaryMonster(x,fighter);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		MtextA.setText("You Encountered a Level 20 MONSTER!!!!!");
 	}
 	

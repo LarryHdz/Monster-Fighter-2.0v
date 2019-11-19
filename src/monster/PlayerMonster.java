@@ -58,12 +58,15 @@ public void displayAll(){
 public void name(String n){
 	uname = n;
 }
+
 public void attack(){
 	attack= x.roll();
 }
+
 public void defense(){
 	defense = x.roll();
 }
+
 public void agility(){
 	agility = x.roll();
 }
