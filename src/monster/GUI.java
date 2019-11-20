@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class GUI 
 {
-	
+
 	JFrame window;
 	Container con;
 	Database db = new Database();
@@ -38,7 +38,6 @@ public class GUI
 	int currentScreenWidth, currentScreenHight;
 	String weapon, position;
 	//private JScrollPane scroll;
-	
 	
 	public GUI(){
 		currentScreenWidth = 800;
@@ -106,7 +105,6 @@ public class GUI
 		
 		con.add(TnameP);
 		con.add(SbuttonP);
-
 	}
 	
 	public class nMonster implements ActionListener{
@@ -125,8 +123,8 @@ public class GUI
 		}
 	}
 	
-	//Button actions
 	public class lMonster implements ActionListener{
+		//Button actions
 		public void actionPerformed(ActionEvent event) {
 			try {
 				if(db.callPlayerMonster(x)) {
@@ -148,14 +146,14 @@ public class GUI
 		TnameP.setVisible(false);
 		SbuttonP.setVisible(false);
 		
-		
 		MgameP = new JPanel();
 		MgameP.setBounds(tmpx, tmpy, tmpw, 500);
 		MgameP.setBackground(Color.white); // Debugging set to black in full game
 		
 		con.add(MgameP);
 		
-		MtextA = new JTextArea("                                   "); // add the text here!!!
+		
+		MtextA = new JTextArea(); // add the text here!!!
 		
 		MtextA.setBounds(tmpx, tmpy, tmpw, 500);
 		MtextA.setBackground(Color.white);
@@ -239,15 +237,6 @@ public class GUI
 		weaponLabelName.setForeground(Color.white);
 		playerPanel.add(weaponLabelName);
 
-		try
-		{
-		    Thread.sleep(1000);
-		}
-		catch(InterruptedException ex)
-		{
-		    Thread.currentThread().interrupt();
-		}
-	
 		playerSetup();
 		
 	}
@@ -273,7 +262,17 @@ public class GUI
 	public void battlefield() {
 		try {
 			db.callAdversaryMonster(x,y);
-			//y.displayAll();
+			
+			try
+			{
+			    Thread.sleep(1000);
+			}
+			catch(InterruptedException ex)
+			{
+			    Thread.currentThread().interrupt();
+			}
+			
+			y.displayAll();
 			encounters();
 			
 		} catch (SQLException e) {
@@ -283,30 +282,22 @@ public class GUI
 	}
 	
 	public void encounters() {
-		try
-		{
-		    Thread.sleep(1000);
-		}
-		catch(InterruptedException ex)
-		{
-		    Thread.currentThread().interrupt();
-		}
-		
 		if(fight.pfirst) {
 			MtextA.setText("Choose your action!");
 		}
 		 else {
+			 
 			 int holder = x.getHp();
 			 
 			 if(fight.monsterAttack()) {
-			
+				 
 				int temp = x.getHp();
 				int f = holder - temp;
 				
 				hpLabelNumber.setText(" "+temp);
 				 MtextA.setText("Monster attacks for "+ f);
 
-				 MtextA.paintImmediately(MtextA.getVisibleRect());
+				// MtextA.paintImmediately(MtextA.getVisibleRect());
 				
 				fight.pfirst = true;
 				 try{
@@ -329,7 +320,7 @@ public class GUI
 			}
 			encounters();
 		}	
-}
+	}
 	
 	public class ChoiceHandler implements ActionListener{
 		//1, attack hit; 2, blocked!; 3, Item; 4, Run Away!;
@@ -344,6 +335,10 @@ public class GUI
 				if(fight.playerAttack()) {
 					int tx = y.getHp();
 					int c = tz - tx;
+					if(c == 0) {
+						c = use.roll();
+						y.setHp(c);
+					}
 					
 					MtextA.setText("You attacked for "+ c +"! The monster has " + y.getHp() + "!");
 					fight.pfirst = false;
@@ -357,7 +352,7 @@ public class GUI
 					}
 				}
 				else {
-					MtextA.setText("You Won!");
+					MtextA.setText("You Won! ");
 					//fight.rank();
 					fight.xp();
 					x.setWin(1);
@@ -411,7 +406,10 @@ public class GUI
 				//roll dice 1 out 2 to run "You ran away!"userun();
 					int t = use.roll();
 					if(t-1 < 2) {
-						MtextA.setText("You ran!");
+						MtextA.setText("You ran for your exp!");
+						x.getRank();
+						fight.rank();
+						//fight.xp();
 						//end game?
 					}
 					else {
@@ -432,111 +430,4 @@ public class GUI
 		}
 		
 	}
-	
-
-	public static void main(String[] args) {
-		new GUI();
-	}
-
-
 }
-
-/*BUTTONS add1
-CbuttonP = new JPanel();
-CbuttonP.setBounds(100, 350, 600, 100);
-CbuttonP.setBackground(Color.darkGray);
-CbuttonP.setLayout(new GridLayout(1,4)); //gives the layout to x rows and y columns etc;
-con.add(CbuttonP);
-
-choice1 = new JButton("Attack!");
-choice1.setBackground(Color.darkGray);
-choice1.setForeground(Color.black);
-choice1.setFont(normalFont);
-choice1.setFocusPainted(false);
-choice1.addActionListener(choicehandler); //directs the click
-choice1.setActionCommand("1");
-CbuttonP.add(choice1);
-
-choice2 = new JButton("Defend");
-choice2.setBackground(Color.darkGray);
-choice2.setForeground(Color.black);
-choice2.setFont(normalFont);
-choice2.setFocusPainted(false);
-choice2.addActionListener(choicehandler);
-choice2.setActionCommand("2");
-CbuttonP.add(choice2);
-
-choice3 = new JButton("Item");
-choice3.setBackground(Color.darkGray);
-choice3.setForeground(Color.black);
-choice3.setFont(normalFont);
-choice3.setFocusPainted(false);
-choice3.addActionListener(choicehandler);
-choice3.setActionCommand("3");
-CbuttonP.add(choice3);
-
-choice4 = new JButton("Run!");
-choice4.setBackground(Color.darkGray);
-choice4.setForeground(Color.black);
-choice4.setFont(normalFont);
-choice4.setFocusPainted(false);
-choice4.addActionListener(choicehandler);
-choice4.setActionCommand("4");
-CbuttonP.add(choice4);
-
-playerPanel = new JPanel();
-playerPanel.setBounds(100, 15, 600, 50);
-playerPanel.setBackground(Color.black);
-playerPanel.setLayout(new GridLayout(1,4));
-con.add(playerPanel);
-
-hpLabel = new JLabel("HP:");
-hpLabel.setFont(normalFont);
-hpLabel.setForeground(Color.white);
-playerPanel.add(hpLabel);
-
-hpLabelNumber = new JLabel();
-hpLabelNumber.setFont(normalFont);
-hpLabelNumber.setForeground(Color.white);
-playerPanel.add(hpLabelNumber);
-
-//can change for something else? Item?
-weaponLabel = new JLabel("Item:");
-weaponLabel.setFont(normalFont);
-weaponLabel.setForeground(Color.white);
-playerPanel.add(weaponLabel);
-
-weaponLabelName = new JLabel();
-weaponLabelName.setFont(normalFont);
-weaponLabelName.setForeground(Color.white);
-playerPanel.add(weaponLabelName);*/
-
-
-
-//add 2
-/*playerPanel = new JPanel();
-playerPanel.setBounds(100, 15, 600, 50);
-playerPanel.setBackground(Color.black);
-playerPanel.setLayout(new GridLayout(1,4));
-con.add(playerPanel);
-
-hpLabel = new JLabel("HP:");
-hpLabel.setFont(normalFont);
-hpLabel.setForeground(Color.white);
-playerPanel.add(hpLabel);
-
-hpLabelNumber = new JLabel();
-hpLabelNumber.setFont(normalFont);
-hpLabelNumber.setForeground(Color.white);
-playerPanel.add(hpLabelNumber);
-
-//can change for something else? Item?
-weaponLabel = new JLabel("Item:");
-weaponLabel.setFont(normalFont);
-weaponLabel.setForeground(Color.white);
-playerPanel.add(weaponLabel);
-
-weaponLabelName = new JLabel();
-weaponLabelName.setFont(normalFont);
-weaponLabelName.setForeground(Color.white);
-playerPanel.add(weaponLabelName);*/
