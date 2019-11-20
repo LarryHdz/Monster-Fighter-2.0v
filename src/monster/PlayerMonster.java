@@ -108,11 +108,14 @@ public int getHp()
 {
 	return hp;
 }
+
+//was adding instead of subtracting was doing negative - negative
+
 public boolean setHp(int h) 
 {
-	hp =hp -h;
+	hp = hp +h;
 	
-	if(this.getHp() <1)
+	if(this.getHp() < 1)
 	{
 		return false;
 	}
@@ -130,7 +133,7 @@ public void heal(int i) {
 public void setWin(int w)
 {
 	win =w;
-	}
+}
 
 public void setLose(int l)
 {

@@ -28,7 +28,7 @@ public class Battle
 	//false =  player win
 	public boolean playerAttack()
 	{
-		int dmg = p1.getAttack()/2 -p2.getDefense();
+		int dmg = p1.getAttack()/2 - p2.getDefense();
 		return p2.setHp(dmg);
 			
 	}
@@ -46,17 +46,11 @@ public class Battle
 		
 		if(chance > 0)
 		{
+			if(p2.getAttack() < p1.getDefense()) {
 			int dmg = p2.getAttack() - p1.getDefense();
 			 p1.setHp(dmg);
+			}	
 		}
-		else
-		{
-			//no attack
-		}
-			
-		
-		
-		
 	}
 
 	public void generateItem()
