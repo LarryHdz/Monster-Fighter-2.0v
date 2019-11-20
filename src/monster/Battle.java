@@ -28,7 +28,7 @@ public class Battle
 	//false =  player win
 	public boolean playerAttack()
 	{
-		int dmg = p1.getAttack()/2 - p2.getDefense();
+		int dmg = p1.getAttack() - p2.getDefense();
 		return p2.setHp(dmg);
 			
 	}
@@ -76,7 +76,7 @@ public class Battle
 	
 	public void useItem()
 	{
-			 p1.setHp(-5);
+			 p1.setHp(+5);
 			 
 			 item =false;
 	}

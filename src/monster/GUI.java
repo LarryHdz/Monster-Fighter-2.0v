@@ -21,7 +21,7 @@ public class GUI
 	JLabel TnameL, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
 	JButton newMonster, loginMonster, choice1, choice2, choice3, choice4;
 	
-	Font titleFont = new Font("Cooper", Font.PLAIN, 40);
+	Font titleFont = new Font("Cooper", Font.PLAIN, 50);
 	Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
 	
 	JTextArea MtextA; //allows for text
@@ -37,16 +37,25 @@ public class GUI
 	int smpx, smpy, smpw, smph;
 	int currentScreenWidth, currentScreenHight;
 	String weapon, position;
+	//private JScrollPane scroll;
 	
 	
 	public GUI(){
 		currentScreenWidth = 800;
 		currentScreenHight = 600;
-		tmpx = (int)Math.round(currentScreenWidth*0.125);
-		tmpy = (int)Math.round(currentScreenHight*0.166);
+		
+		tmpx = (int)Math.round(currentScreenWidth*0.375);
+		tmpy = (int)Math.round(currentScreenHight*0.25);
 		tmpw = (int)Math.round(currentScreenWidth*0.75);
-		tmph = (int)Math.round(currentScreenWidth*0.25);
+		tmph = (int)Math.round(currentScreenHight*0.25);
+		
+		smpx = (int)Math.round(currentScreenWidth*0.375);
+		smpy = (int)Math.round(currentScreenHight*0.666);
+		smpw = (int)Math.round(currentScreenWidth*0.75);
+		smph = (int)Math.round(currentScreenWidth*0.25);
+		
 		window = new JFrame();
+		
 		window.setSize(currentScreenWidth, currentScreenHight);
 		
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -54,6 +63,7 @@ public class GUI
 		int y = (int) ((dimension.getHeight() - window.getHeight()) / 2);
 		window.setLocation(x, y);
 		
+	
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setBackground(Color.black);
 		window.setLayout(null);
@@ -63,18 +73,12 @@ public class GUI
 		
 		
 		TnameP = new JPanel();
-		TnameP.setBounds(tmpx, tmpy, tmpw, tmph); // starts on(x,y), then given a (width, height)
+		TnameP.setBounds(tmpx, tmpy, smpw, smph); // starts on(x,y), then given a (width, height)
 		TnameP.setBackground(Color.black); // gives color to the title name
 		
 		TnameL = new JLabel("Monster Fighter v2.0!");
 		TnameL.setForeground(Color.white); // font color blue look nice
 		TnameL.setFont(titleFont);
-		
-		
-		smpx = (int)Math.round(currentScreenWidth*0.375);
-		smpy = (int)Math.round(currentScreenHight*0.666);
-		smpw = (int)Math.round(currentScreenWidth*0.75);
-		smph = (int)Math.round(currentScreenWidth*0.25);
 		
 		SbuttonP = new JPanel();
 		SbuttonP.setBounds(smpx, smpy, smpw, smph); // starts on(x,y), then given a (width, height)
@@ -144,15 +148,16 @@ public class GUI
 		TnameP.setVisible(false);
 		SbuttonP.setVisible(false);
 		
+		
 		MgameP = new JPanel();
-		MgameP.setBounds(100, 100, 600, 250);
+		MgameP.setBounds(tmpx, tmpy, tmpw, 500);
 		MgameP.setBackground(Color.white); // Debugging set to black in full game
 		
 		con.add(MgameP);
 		
-		MtextA = new JTextArea(); // add the text here!!!
+		MtextA = new JTextArea("                                   "); // add the text here!!!
 		
-		MtextA.setBounds(100, 100, 600, 250);
+		MtextA.setBounds(tmpx, tmpy, tmpw, 500);
 		MtextA.setBackground(Color.white);
 		MtextA.setForeground(Color.black);
 		MtextA.setFont(normalFont);
@@ -164,7 +169,7 @@ public class GUI
 		// Actions
 		
 		CbuttonP = new JPanel();
-		CbuttonP.setBounds(100, 350, 600, 100);
+		CbuttonP.setBounds(tmpx, 600, smpw, 100);
 		CbuttonP.setBackground(Color.darkGray);
 		CbuttonP.setLayout(new GridLayout(1,4)); //gives the layout to x rows and y columns etc;
 		con.add(CbuttonP);
@@ -209,7 +214,7 @@ public class GUI
 		
 		//health and items
 		playerPanel = new JPanel();
-		playerPanel.setBounds(100, 15, 600, 50);
+		playerPanel.setBounds(tmpx, 15, 700, 60);
 		playerPanel.setBackground(Color.black);
 		playerPanel.setLayout(new GridLayout(1,4));
 		con.add(playerPanel);
@@ -234,9 +239,16 @@ public class GUI
 		weaponLabelName.setForeground(Color.white);
 		playerPanel.add(weaponLabelName);
 
+		try
+		{
+		    Thread.sleep(1000);
+		}
+		catch(InterruptedException ex)
+		{
+		    Thread.currentThread().interrupt();
+		}
 	
 		playerSetup();
-		//battlefield();
 		
 	}
 	
@@ -244,8 +256,10 @@ public class GUI
 		//playerHP = 15;
 		monsterHP = 20;
 		weapon = "Medkit";
+		if(fight.item = true) {
 		weaponLabelName.setText(weapon);
-	
+		}
+		
 		int c = x.getHp();
 		hpLabelNumber.setText("" + c);
 		
@@ -269,68 +283,54 @@ public class GUI
 	}
 	
 	public void encounters() {
-
-		//playerSetup();
-		MtextA.setText("You go first!");
+		try
+		{
+		    Thread.sleep(1000);
+		}
+		catch(InterruptedException ex)
+		{
+		    Thread.currentThread().interrupt();
+		}
 		
 		if(fight.pfirst) {
-			
-			MtextA.setText("You go first!");
-			//CbuttonP.setVisible(true);
-			
-		
+			MtextA.setText("Choose your action!");
 		}
 		 else {
-			MtextA.setText("Monster goes first!");
+			 int holder = x.getHp();
+			 
+			 if(fight.monsterAttack()) {
 			
-			if(fight.monsterAttack()) {
-				
-				MtextA.setText("Monster attacks!");
-				
 				int temp = x.getHp();
+				int f = holder - temp;
 				
 				hpLabelNumber.setText(" "+temp);
-				
-				//CbuttonP.setVisible(false);
+				 MtextA.setText("Monster attacks for "+ f);
+
+				 MtextA.paintImmediately(MtextA.getVisibleRect());
 				
 				fight.pfirst = true;
-	
+				 try{
+					    Thread.sleep(1000);
+					}
+					catch(InterruptedException ex){
+					    Thread.currentThread().interrupt();
+					}
 			}
-			
 			else {
 				MtextA.setText("You Lost!");
 				//update;
+				x.setLose(1);
 			}
-		}
-		
-		
+			MtextA.paintImmediately(MtextA.getVisibleRect());
+			fight.generateItem();
+			if(fight.item = true) {
+				weaponLabelName.setText(weapon);
+				weaponLabelName.paintImmediately(weaponLabelName.getVisibleRect());
+			}
+			encounters();
+		}	
 }
 	
-	/*public void playerSetup() {
-		/*try {
-			db.callPlayerMonster(x);
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-		//SbuttonP.setVisible(true); 
-		//might have to clear the screen
-		playerHP = x.getHp();
-		
-		hpLabelNumber.setText(" "+ playerHP);
-		
-		if(fight.getItem()) {
-			weapon = "Health Pack";
-		}
-		else {
-			weapon = " ";
-		}
-		weaponLabel.setText(weapon);
-		
-	} */
-	
-
 	public class ChoiceHandler implements ActionListener{
 		//1, attack hit; 2, blocked!; 3, Item; 4, Run Away!;
 		
@@ -340,11 +340,27 @@ public class GUI
 			
 			if(yourChoice.equals("1")) {
 				//roll number for attacking so "You hit for _ points!" useack();
+				int tz = y.getHp();
 				if(fight.playerAttack()) {
-					MtextA.setText("The monster has " + y.getHp());
+					int tx = y.getHp();
+					int c = tz - tx;
+					
+					MtextA.setText("You attacked for "+ c +"! The monster has " + y.getHp() + "!");
+					fight.pfirst = false;
+					try
+					{
+					    Thread.sleep(1000);
+					}
+					catch(InterruptedException ex)
+					{
+					    Thread.currentThread().interrupt();
+					}
 				}
 				else {
 					MtextA.setText("You Won!");
+					//fight.rank();
+					fight.xp();
+					x.setWin(1);
 				}
 				
 			}
@@ -352,6 +368,7 @@ public class GUI
 				//roll dice 1 out 2 to defend "You blocked!" usedef();
 				fight.defend();
 				MtextA.setText("You blocked!");
+				fight.pfirst = true;
 			}
 			else if(yourChoice.equals("3")) {
 				//roll dice out of 5 when you can use an item "You healed _ points!" useitem();
@@ -359,14 +376,34 @@ public class GUI
 				if(fight.getItem()) {
 					fight.useItem();
 					MtextA.setText("You healed for 5 points!");
+					//fight.pfirst = false;
+					fight.item = false;
 					
 					//update players health
 					hpLabelNumber.setText(" "+x.getHp());
-					weaponLabelName.setText(" ");
 					
+					hpLabelNumber.paintImmediately(hpLabelNumber.getVisibleRect());
+					weaponLabelName.setText("None");
+					weaponLabelName.paintImmediately(weaponLabelName.getVisibleRect());
+					try
+					{
+					    Thread.sleep(1000);
+					}
+					catch(InterruptedException ex)
+					{
+					    Thread.currentThread().interrupt();
+					}
 				}
 				else {
 					MtextA.setText("You dont have an item!");
+					try
+					{
+					    Thread.sleep(1000);
+					}
+					catch(InterruptedException ex)
+					{
+					    Thread.currentThread().interrupt();
+					}
 				}
 			}
 			
@@ -382,12 +419,18 @@ public class GUI
 						//continue
 					}
 			}
-			
-			fight.pfirst = false;
-			
-			//encounters();
-			
+			MtextA.paintImmediately(MtextA.getVisibleRect());
+			 try
+				{
+				    Thread.sleep(1000);
+				}
+				catch(InterruptedException ex)
+				{
+				    Thread.currentThread().interrupt();
+				}
+			encounters();
 		}
+		
 	}
 	
 

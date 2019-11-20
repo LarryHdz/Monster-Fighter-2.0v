@@ -58,12 +58,15 @@ public void displayAll(){
 public void name(String n){
 	uname = n;
 }
+
 public void attack(){
 	attack= x.roll();
 }
+
 public void defense(){
 	defense = x.roll();
 }
+
 public void agility(){
 	agility = x.roll();
 }
@@ -81,7 +84,6 @@ public int getDefense(){
 public int getAgility(){
 	return agility;
 }
-
 
 public int getRank(){
 	return rank;
@@ -102,7 +104,6 @@ public int getLose(){
 public String getName(){
 	return uname;
 }
-
 
 public int getHp()
 {
@@ -146,7 +147,6 @@ public void setRank()
 
 }
 
-
 public void setAttack(int a)
 {
 	attack =a;
@@ -162,7 +162,6 @@ public void setAgility(int a)
 	agility =a;
 
 }
-
 
 public void setXp(int x)
 {
