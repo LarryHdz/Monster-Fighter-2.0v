@@ -58,12 +58,15 @@ public void displayAll(){
 public void name(String n){
 	uname = n;
 }
+
 public void attack(){
 	attack= x.roll();
 }
+
 public void defense(){
 	defense = x.roll();
 }
+
 public void agility(){
 	agility = x.roll();
 }
@@ -81,7 +84,6 @@ public int getDefense(){
 public int getAgility(){
 	return agility;
 }
-
 
 public int getRank(){
 	return rank;
@@ -103,16 +105,18 @@ public String getName(){
 	return uname;
 }
 
-
 public int getHp()
 {
 	return hp;
 }
+
+//was adding instead of subtracting was doing negative - negative
+
 public boolean setHp(int h) 
 {
-	hp =hp -h;
+	hp = hp +h;
 	
-	if(this.getHp() <1)
+	if(this.getHp() < 1)
 	{
 		return false;
 	}
@@ -130,7 +134,7 @@ public void heal(int i) {
 public void setWin(int w)
 {
 	win =w;
-	}
+}
 
 public void setLose(int l)
 {
@@ -142,7 +146,6 @@ public void setRank()
 	rank = xp/20;
 
 }
-
 
 public void setAttack(int a)
 {
@@ -159,7 +162,6 @@ public void setAgility(int a)
 	agility =a;
 
 }
-
 
 public void setXp(int x)
 {
