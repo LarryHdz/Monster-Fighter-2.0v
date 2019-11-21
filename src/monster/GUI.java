@@ -311,6 +311,12 @@ public class GUI
 				MtextA.setText("You Lost!");
 				//update;
 				x.setLose(1);
+				try {
+					db.updateDB(x);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			MtextA.paintImmediately(MtextA.getVisibleRect());
 			fight.generateItem();
@@ -355,7 +361,14 @@ public class GUI
 					MtextA.setText("You Won! ");
 					//fight.rank();
 					fight.xp();
+					fight.rank();
 					x.setWin(1);
+					try {
+						db.updateDB(x);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				
 			}

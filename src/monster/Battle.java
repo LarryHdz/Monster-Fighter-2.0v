@@ -28,7 +28,11 @@ public class Battle
 	//false =  player win
 	public boolean playerAttack()
 	{
-		int dmg = p1.getAttack() - p2.getDefense();
+		int dmg = p1.getAttack() - (p2.getDefense()/2);
+		if(dmg < 0)
+		{
+			return true;
+		}
 		return p2.setHp(dmg);
 			
 	}
@@ -36,7 +40,11 @@ public class Battle
 	//false = player lose
 	public boolean monsterAttack()
 	{
-		int dmg = p2.getAttack() -p1.getDefense();
+		int dmg = p2.getAttack() - (p1.getDefense()/2);
+		if(dmg < 0)
+		{
+			return true;
+		}
 		return p1.setHp(dmg);
 	}
 
@@ -89,7 +97,10 @@ public class Battle
 		{
 			p1.displayAll();
 			String option = JOptionPane.showInputDialog("You leveled up!\n Add +1 to any stat\n 1.Attack " + p1.getAttack() + "\n 2.Defense " + p1.getDefense()+ "\n 3.Agility " + p1.getDefense() + "\n");
-			
+			if(option  == null)
+			{
+				option = "3";
+			}
 			if(option == "1")
 			{
 				p1.setAttack(p1.getAttack()+1);

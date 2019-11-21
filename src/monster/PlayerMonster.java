@@ -114,7 +114,7 @@ public int getHp()
 
 public boolean setHp(int h) 
 {
-	hp = hp +h;
+	hp = hp -h;
 	
 	if(this.getHp() < 1)
 	{
@@ -133,12 +133,12 @@ public void heal(int i) {
 
 public void setWin(int w)
 {
-	win =w;
+	win =win +w;
 }
 
 public void setLose(int l)
 {
-	lose = l;
+	lose = lose +l;
 }
 
 public void setRank()

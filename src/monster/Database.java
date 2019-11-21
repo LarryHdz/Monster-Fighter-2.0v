@@ -201,7 +201,7 @@ m.dbm(result.getString(1), result.getString(2),result.getString(3),result.getStr
 		java.sql.Statement stmt = con.createStatement();
 		String sqlStatement ;
 		
-			sqlStatement = "UPDATE Monsters SET attack = " + m.getAttack() + ", defense = " + m.getDefense() + ", agility = " + m.getAgility() + ", rank = " + m.getRank() + ", xp = " + m.getXp() + ", win = " + m.getWin() + ", lose = " + m.getLose() + "WHERE uname =" + "\"" + m.getName() + "\"";
+			sqlStatement = "UPDATE Monsters SET attack = " + m.getAttack() + ", defense = " + m.getDefense() + ", agility = " + m.getAgility() + ", rank = " + m.getRank() + ", xp = " + m.getXp() + ", win = " + m.getWin() + ", lose = " + m.getLose() + " WHERE uname = " + "\"" + m.getName() + "\"";
 			
 			stmt.executeUpdate(sqlStatement); 
 		
