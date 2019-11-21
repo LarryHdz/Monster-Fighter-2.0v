@@ -18,7 +18,7 @@ public class GUI
 	
 	
 	JPanel TnameP, SbuttonP, MgameP, CbuttonP, playerPanel;
-	JLabel TnameL, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
+	JLabel TnameL, hpLabel, hpLabelNumber, ItemLabel, ItemLabelName;
 	JButton newMonster, loginMonster, choice1, choice2, choice3, choice4;
 	
 	Font titleFont = new Font("Cooper", Font.PLAIN, 50);
@@ -227,15 +227,15 @@ public class GUI
 		hpLabelNumber.setForeground(Color.white);
 		playerPanel.add(hpLabelNumber);
 		
-		weaponLabel = new JLabel("Items:");
-		weaponLabel.setFont(normalFont);
-		weaponLabel.setForeground(Color.white);
-		playerPanel.add(weaponLabel);
+		ItemLabel = new JLabel("Items:");
+		ItemLabel.setFont(normalFont);
+		ItemLabel.setForeground(Color.white);
+		playerPanel.add(ItemLabel);
 		
-		weaponLabelName = new JLabel();
-		weaponLabelName.setFont(normalFont);
-		weaponLabelName.setForeground(Color.white);
-		playerPanel.add(weaponLabelName);
+		ItemLabelName = new JLabel();
+		ItemLabelName.setFont(normalFont);
+		ItemLabelName.setForeground(Color.white);
+		playerPanel.add(ItemLabelName);
 
 		playerSetup();
 		
@@ -246,7 +246,7 @@ public class GUI
 		monsterHP = 20;
 		weapon = "Medkit";
 		if(fight.item = true) {
-		weaponLabelName.setText(weapon);
+			ItemLabelName.setText(weapon);
 		}
 		
 		int c = x.getHp();
@@ -321,8 +321,8 @@ public class GUI
 			MtextA.paintImmediately(MtextA.getVisibleRect());
 			fight.generateItem();
 			if(fight.item = true) {
-				weaponLabelName.setText(weapon);
-				weaponLabelName.paintImmediately(weaponLabelName.getVisibleRect());
+				ItemLabelName.setText(weapon);
+				ItemLabelName.paintImmediately(ItemLabelName.getVisibleRect());
 			}
 			encounters();
 		}	
@@ -391,8 +391,8 @@ public class GUI
 					hpLabelNumber.setText(" "+x.getHp());
 					
 					hpLabelNumber.paintImmediately(hpLabelNumber.getVisibleRect());
-					weaponLabelName.setText("None");
-					weaponLabelName.paintImmediately(weaponLabelName.getVisibleRect());
+					ItemLabelName.setText("None");
+					ItemLabelName.paintImmediately(ItemLabelName.getVisibleRect());
 					try
 					{
 					    Thread.sleep(1000);
